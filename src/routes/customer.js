@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   // if(!req.query.email) {
   //   return res.status(400).send('Missing URL parameter: email');
   // }
-  
+
   // Promise thenable
   // CustomerModel.findOne({
   //   email: req.query.email
@@ -25,9 +25,9 @@ router.get('/', async (req, res) => {
       .findOne({
         email: req.query.email,
       });
-    res.status(200).send(foundCustomer);
+    res.status(200).json(foundCustomer);
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json(err);
   }
 });
 
@@ -53,10 +53,10 @@ router.post('/', (req, res) => {
 
   model.save()
     .then((doc) => {
-      res.status(201).send(doc);
+      res.status(201).json(doc);
     })
     .catch(err => {
-      res.status(500).json(err)
+      res.status(500).json(err);
     });
 });
 
@@ -69,13 +69,13 @@ router.put('/', (req, res) => {
   CustomerModel.findOneAndUpdate({
     email: req.query.email
   }, req.body, {
-    new: true
+    new: true // returns the updated record other than that it returns the previous one
   })
     .then((doc) => {
-      res.json(doc)
+      res.json(doc);
     })
     .catch((err) => {
-      res.status(500).json(err)
+      res.status(500).json(err);
     });
 });
 
@@ -89,11 +89,11 @@ router.delete('/', (req, res) => {
     email: req.query.email
   })
     .then((doc) => {
-      res.json(doc)
+      res.json(doc);
     })
     .catch((err) => {
-      res.status(500).json(err)
+      res.status(500).json(err);
     });
 });
 
-module.exports = router
+module.exports = router;
