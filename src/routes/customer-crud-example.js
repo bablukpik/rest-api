@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const CustomerModel = require('../models/customer.model');
+const CustomerModel = require('../models/Customer');
 
 // GET
 router.get('/', async (req, res) => {
@@ -56,14 +56,20 @@ router.post('/', (req, res) => {
       res.status(201).json(doc);
     })
     .catch(err => {
-      res.status(500).json(err);
+      // res.status(500).json(err);
+      res.status(500).json({
+        error: "Unable to create a customer"
+      });
     });
 });
 
 // UPDATE
 router.put('/', (req, res) => {
   if (!req.query.email) {
-    return res.status(400).send('Missing URL parameter: email')
+    // return res.status(400).send('Missing URL parameter: Email')
+    return res.status(400).json({
+      error: "Missing URL parameter: Email"
+    });
   }
 
   CustomerModel.findOneAndUpdate({
@@ -75,14 +81,20 @@ router.put('/', (req, res) => {
       res.json(doc);
     })
     .catch((err) => {
-      res.status(500).json(err);
+      // res.status(500).json(err);
+      res.status(500).json({
+        error: "Unable to update data!"
+      });
     });
 });
 
 // DELETE
 router.delete('/', (req, res) => {
   if (!req.query.email) {
-    return res.status(400).send('Missing URL parameter: email')
+    // return res.status(400).send('Missing URL parameter: email')
+    return res.status(400).json({
+      error: 'Missing URL parameter: Email'
+    });
   }
 
   CustomerModel.findOneAndRemove({
@@ -92,7 +104,10 @@ router.delete('/', (req, res) => {
       res.json(doc);
     })
     .catch((err) => {
-      res.status(500).json(err);
+      // res.status(500).json(err);
+      res.status(500).json({
+        error: "Unable to delete this record!"
+      });
     });
 });
 

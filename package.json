@@ -2,21 +2,24 @@
   "name": "rest-api-workshop",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "PORT=3000 node src/index.js",
-    "start-watch": "nodemon src/index.js",
+    "start": "PORT=3000 node src/app.js",
+    "start-watch": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
-    "mongoose": "^5.0.11"
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.10"
   },
   "devDependencies": {
-    "nodemon": "^1.17.2"
+    "nodemon": "^2.0.15"
   }
 }
