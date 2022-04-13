@@ -1,3 +1,5 @@
+# REST API
+This is a simple CRUD project using Nodejs, Expressjs, & Mongoose with JWT and BCRYPT.
 ## Setup
 Create a `.env` file first at the root of the project and add some environment veriables like this
 
