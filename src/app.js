@@ -5,11 +5,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
+require('dotenv/config');
 const stuffRoutes = require('./routes/stuff');
 const authRoutes = require('./routes/auth');
 const usersRoutes = require('./routes/users');
-
-require('dotenv').config();
 
 const PORT = process.env.PORT || 8000;
 

@@ -76,7 +76,7 @@ exports.login = (req, res) => {
               error: 'Incorrect password',
             });
           }
-          
+
           // Create an access token
           const accessToken = jwt.sign(
             { userId: user._id },

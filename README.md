@@ -5,7 +5,8 @@ Create a `.env` file first at the root of the project and add some environment v
 
 ```
 PORT=8000
-JWT_SECRET=abcd
+ACCESS_TOKEN_SECRET=abcdasdf
+REFRESH_TOKEN_SECRET=abcdffa
 
 ```
 

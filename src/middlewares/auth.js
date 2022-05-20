@@ -1,21 +1,28 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const { ACCESS_TOKEN_SECRET } = require('../util/auth');
 
 // authentication middleware
 module.exports = (req, res, next) => {
-    try {
-      const token = req.headers.authorization.split(' ')[1];
-      // if (!token) return res.status(403).send("Access denied!");
-      if (!token) return res.status(403).json({
-            error: new Error('Access denied!')
-          });
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-      req.auth = decodedToken;
-      next();
-  } catch (error) {
-      // res.status(401).send("Authorization failure!");
-      res.status(401).json({
-        error: new Error('Authorization failure!')
+  try {
+    // Option 1
+    const token = req.headers.authorization?.split(' ')[1] || ''; // Bearer Token
+
+    // Option 2
+    // const token = req.header('x-auth-token');
+
+    if (!token) {
+      // token not found
+      return res.status(401).json({
+        error: 'Authorization failed',
       });
+    }
+    const jwtData = jwt.verify(token, ACCESS_TOKEN_SECRET);
+    req.auth = jwtData;
+    return next();
+  } catch {
+    // token found but the token is no longer valid
+    return res.status(403).json({
+      error: 'Access denied',
+    });
   }
 };
