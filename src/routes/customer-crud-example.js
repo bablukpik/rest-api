@@ -5,21 +5,9 @@ const CustomerModel = require('../models/Customer');
 // GET
 router.get('/', async (req, res) => {
   // Sample server side validation
-  // if(!req.query.email) {
-  //   return res.status(400).send('Missing URL parameter: email');
-  // }
-
-  // Promise thenable
-  // CustomerModel.findOne({
-  //   email: req.query.email
-  // })
-  //   .then(doc => {
-  //     res.json(doc)
-  //   })
-  //   .catch(err => {
-  //     res.status(500).json(err)
-  //   });
-
+  if(!req.query.email) {
+    return res.status(400).send('Missing URL parameter: email');
+  }
   try {
     const foundCustomer = await CustomerModel
       .findOne({
@@ -42,12 +30,6 @@ router.post('/', (req, res) => {
   if (!req.body.email) {
     // ...
   }
-
-  // Sample payload:
-  // let user = {
-  //   name: 'firstname lastname',
-  //   email: 'email@gmail.com'
-  // }
 
   let model = new CustomerModel(req.body);
 

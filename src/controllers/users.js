@@ -1,6 +1,6 @@
 const User = require("../models/User");
 
-// single user
+// get user details by id
 exports.getMe = async (req, res) => {
   try {
       const user = await User.findById(req.auth.userId);

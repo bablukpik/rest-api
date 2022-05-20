@@ -3,16 +3,15 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
-// example routes
-const personRoutes = require('./routes/person-query-params-example');
-const customerCrudRoutes = require('./routes/customer-crud-example');
-
+const cors = require('cors');
+const helmet = require('helmet');
 const stuffRoutes = require('./routes/stuff');
 const authRoutes = require('./routes/auth');
 const usersRoutes = require('./routes/users');
 
-const PORT = process.env.PORT || 8080;
+require('dotenv').config();
+
+const PORT = process.env.PORT || 8000;
 
 // DB connection
 mongoose.connect(`mongodb://localhost:27017/test`)
@@ -25,15 +24,13 @@ mongoose.connect(`mongodb://localhost:27017/test`)
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());
+app.use(cors());
+app.use(helmet());
 
-// routes
-app.use(personRoutes);
-app.use('/customer', customerCrudRoutes);
-
-// register with app these routes
-app.use('/api/stuff', stuffRoutes);
+// register routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/stuff', stuffRoutes);
 
 // handler for 404 - Resource Not Found
 app.use((_, res) => {
