@@ -9,8 +9,8 @@ const {
 } = require('../util/auth');
 
 let refreshTokens = [];
-const ACCESS_TOKEN_EXPIRES_TIME = '2s';
-const REFRESH_TOKEN_EXPIRES_TIME = '20s';
+const ACCESS_TOKEN_EXPIRES_TIME = '10m';
+const REFRESH_TOKEN_EXPIRES_TIME = '7d';
 
 // Create a new user
 exports.signup = (req, res) => {
